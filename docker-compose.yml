@@ -1,0 +1,45 @@
+version: '3.8'
+
+services:
+  master:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: master
+    environment:
+      - MODULE_NAME=main
+    ports:
+      - "8000:8000"
+    depends_on:
+      - secondary1
+      - secondary2
+    networks:
+      - app-network
+
+  secondary1:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: secondary1
+    environment:
+      - MODULE_NAME=secondary
+    ports:
+      - "8001:8000"
+    networks:
+      - app-network
+
+  secondary2:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: secondary2
+    environment:
+      - MODULE_NAME=secondary
+    ports:
+      - "8002:8000"
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge

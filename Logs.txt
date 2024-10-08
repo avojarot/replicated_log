@@ -1,0 +1,38 @@
+master      | INFO:     Started server process [7]
+master      | INFO:     Waiting for application startup.
+secondary2  | INFO:     Started server process [7]
+secondary1  | INFO:     Started server process [7]
+master      | INFO:     Application startup complete.
+master      | INFO:     Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
+secondary1  | INFO:     Waiting for application startup.
+secondary1  | INFO:     Application startup complete.
+secondary1  | INFO:     Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
+secondary1  | INFO:secondary:Replicated message: Hello, World!
+secondary1  | INFO:     172.19.0.4:33422 - "POST /replicate HTTP/1.1" 200 OK
+secondary1  | INFO:secondary:Fetching all replicated messages
+secondary1  | INFO:     172.19.0.1:33866 - "GET /messages HTTP/1.1" 200 OK
+secondary2  | INFO:     Waiting for application startup.
+secondary2  | INFO:     Application startup complete.
+secondary2  | INFO:     Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
+secondary2  | INFO:secondary:Replicated message: Hello, World!
+secondary2  | INFO:     172.19.0.4:50094 - "POST /replicate HTTP/1.1" 200 OK
+secondary2  | INFO:secondary:Fetching all replicated messages
+secondary2  | INFO:     172.19.0.1:56938 - "GET /messages HTTP/1.1" 200 OK
+master      | INFO:     172.19.0.1:47944 - "POST /messages HTTP/1.1" 422 Unprocessable Entity
+master      | INFO:master:Fetching all messages
+master      | INFO:     172.19.0.1:47958 - "GET /messages HTTP/1.1" 200 OK
+master      | INFO:     172.19.0.1:47958 - "GET /favicon.ico HTTP/1.1" 404 Not Found
+master      | INFO:master:Fetching all messages
+master      | INFO:     172.19.0.1:57680 - "GET /messages HTTP/1.1" 200 OK
+master      | INFO:master:Fetching all messages
+master      | INFO:     172.19.0.1:54964 - "GET /messages HTTP/1.1" 200 OK
+master      | INFO:master:Received message: Hello, World!
+master      | INFO:master:Replicating to http://secondary1:8000/replicate
+master      | INFO:master:Replicating to http://secondary2:8000/replicate
+master      | INFO:httpx:HTTP Request: POST http://secondary1:8000/replicate "HTTP/1.1 200 OK"
+master      | INFO:master:Received ACK from http://secondary1:8000
+master      | INFO:httpx:HTTP Request: POST http://secondary2:8000/replicate "HTTP/1.1 200 OK"
+master      | INFO:master:Received ACK from http://secondary2:8000
+master      | INFO:     172.19.0.1:55300 - "POST /messages HTTP/1.1" 200 OK
+master      | INFO:master:Fetching all messages
+master      | INFO:     172.19.0.1:41690 - "GET /messages HTTP/1.1" 200 OK
