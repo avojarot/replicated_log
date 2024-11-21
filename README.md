@@ -35,14 +35,16 @@ Secondary 2: http://localhost:8002
 ### Master Server (http://localhost:8000)
 #### POST /messages
 
-Description: Add a message and replicate it.
+Description: Add a message with a specified write_concern and replicate it to Secondaries.
 
 Request Body:
 
 ```
 {
-  "content": "Your message here"
+  "content": "Your message here",
+  "write_concern": 2
 }
+
 ```
 #### GET /messages
 
@@ -52,31 +54,21 @@ Description: Retrieve all messages.
 Description: Retrieve replicated messages.
 
 ## Testing the Application
-Add a Message:
-
-```
-curl.exe -X POST -H "Content-Type: application/json" -d "{\"content\": \"Hello, World!\"}" http://localhost:8000/messages
-Retrieve Messages:
-```
-From Master:
-
-```
-curl.exe http://localhost:8000/messages
-```
-From Secondary 1:
-
-```
-curl.exe http://localhost:8001/messages
-```
-From Secondary 2:
-
-```
-curl.exe http://localhost:8002/messages
-```
+All commands to test are shown in [test_commands.sh](test_commands.sh)
 
 ## Notes
 Blocking Replication: The Master waits for all Secondaries to acknowledge receipt before responding.
 
 Artificial Delay: Secondaries use time.sleep() to simulate network latency.
+
+Write Concern (write_concern): Allows clients to specify the number of acknowledgments required before the Master responds.
+
+Artificial Delay: Secondaries introduce random delays to simulate network latency and test eventual consistency.
+
+Blocking Replication: The Master waits for the specified number of acknowledgments, which may cause delays in responses.
+
+Message Deduplication: Messages are deduplicated based on a unique message_id assigned by the Master.
+
+Total Ordering: All nodes maintain the same order of messages based on message_id.
 
 Logs: View logs with docker-compose logs -f. test logs are in file [Logs.txt](Logs.txt)
