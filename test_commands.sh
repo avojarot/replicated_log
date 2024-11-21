@@ -53,7 +53,7 @@ wait
 docker-compose stop secondary1
 
 # Send a message with write_concern = 2 while a secondary is down
-# Expected: Error or delayed response if the write_concern cannot be satisfied
+# Expected: Error returned immediately as write_concern cannot be satisfied
 curl -X POST "http://localhost:8000/messages" \
   -H "Content-Type: application/json" \
   -d '{"content": "Secondary Down Test", "write_concern": 2}'
@@ -62,8 +62,8 @@ curl -X POST "http://localhost:8000/messages" \
 # Expected: Verify all messages received and processed correctly
 curl "http://localhost:8000/messages"
 
-# Fetch stored messages from Secondary1
-# Expected: Verify consistency and ordering
+# Fetch stored messages from Secondary1 (which was down)
+# Expected: Messages may be missing; will be updated once secondary is back up
 curl "http://localhost:8001/messages"
 
 # Fetch stored messages from Secondary2

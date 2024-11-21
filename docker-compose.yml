@@ -27,6 +27,11 @@ services:
       - "8001:8000"
     networks:
       - app-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/status"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
 
   secondary2:
     build:
@@ -39,6 +44,11 @@ services:
       - "8002:8000"
     networks:
       - app-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/status"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
 
 networks:
   app-network:

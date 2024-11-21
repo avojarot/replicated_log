@@ -1,4 +1,8 @@
-ndary2  | INFO:     Started server process [7]
+✔ Container master      Recreated                                                                                                                                                                  0.3s
+ ✔ Container secondary1  Recreated                                                                                                                                                                  0.2s
+ ✔ Container secondary2  Recreated                                                                                                                                                                  0.2s
+Attaching to master, secondary1, secondary2
+secondary2  | INFO:     Started server process [7]
 secondary2  | INFO:     Waiting for application startup.
 secondary1  | INFO:     Started server process [7]
 secondary2  | INFO:     Application startup complete.
@@ -10,77 +14,89 @@ master      | INFO:     Started server process [7]
 master      | INFO:     Waiting for application startup.
 master      | INFO:     Application startup complete.
 master      | INFO:     Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
+secondary1  | INFO:     172.18.0.4:56346 - "GET /status HTTP/1.1" 200 OK
+master      | INFO:httpx:HTTP Request: GET http://secondary1:8000/status "HTTP/1.1 200 OK"
+master      | INFO:master:Heartbeat check for http://secondary1:8000: healthy
+secondary2  | INFO:     172.18.0.4:58940 - "GET /status HTTP/1.1" 200 OK
+master      | INFO:httpx:HTTP Request: GET http://secondary2:8000/status "HTTP/1.1 200 OK"
+master      | INFO:master:Heartbeat check for http://secondary2:8000: healthy
+secondary1  | INFO:     172.18.0.4:45104 - "GET /status HTTP/1.1" 200 OK
+master      | INFO:httpx:HTTP Request: GET http://secondary1:8000/status "HTTP/1.1 200 OK"
+master      | INFO:master:Heartbeat check for http://secondary1:8000: healthy
+secondary2  | INFO:     172.18.0.4:37814 - "GET /status HTTP/1.1" 200 OK
+master      | INFO:httpx:HTTP Request: GET http://secondary2:8000/status "HTTP/1.1 200 OK"
+master      | INFO:master:Heartbeat check for http://secondary2:8000: healthy
 master      | INFO:master:Received message: Message WC=1 with write_concern=1
-master      | INFO:master:Replicating to http://secondary1:8000/replicate
 master      | INFO:master:Replicating to http://secondary2:8000/replicate
+master      | INFO:master:Replicating to http://secondary1:8000/replicate
 secondary2  | INFO:secondary:Received replication request for message 1
-secondary2  | INFO:     172.18.0.4:53680 - "POST /replicate HTTP/1.1" 200 OK
+secondary2  | INFO:     172.18.0.4:37822 - "POST /replicate HTTP/1.1" 200 OK
 secondary1  | INFO:secondary:Received replication request for message 1
-secondary1  | INFO:     172.18.0.4:56578 - "POST /replicate HTTP/1.1" 200 OK
+secondary1  | INFO:     172.18.0.4:45116 - "POST /replicate HTTP/1.1" 200 OK
 master      | INFO:httpx:HTTP Request: POST http://secondary2:8000/replicate "HTTP/1.1 200 OK"
-master      | INFO:master:Received ACK from http://secondary2:8000
+master      | INFO:master:Received ACK from http://secondary2:8000 for message 1
 master      | INFO:httpx:HTTP Request: POST http://secondary1:8000/replicate "HTTP/1.1 200 OK"
-master      | INFO:master:Received ACK from http://secondary1:8000
+master      | INFO:master:Received ACK from http://secondary1:8000 for message 1
 master      | INFO:master:Required ACKs received: 3/1
-master      | INFO:     172.18.0.1:38368 - "POST /messages HTTP/1.1" 200 OK
+master      | INFO:     172.18.0.1:60500 - "POST /messages HTTP/1.1" 200 OK
 master      | INFO:master:Received message: Message WC=2 with write_concern=2
-master      | INFO:master:Replicating to http://secondary1:8000/replicate
 master      | INFO:master:Replicating to http://secondary2:8000/replicate
-secondary1  | INFO:secondary:Received replication request for message 2
+master      | INFO:master:Replicating to http://secondary1:8000/replicate
 secondary2  | INFO:secondary:Received replication request for message 2
-secondary1  | INFO:     172.18.0.4:56588 - "POST /replicate HTTP/1.1" 200 OK
-secondary2  | INFO:     172.18.0.4:53682 - "POST /replicate HTTP/1.1" 200 OK
+secondary1  | INFO:secondary:Received replication request for message 2
+secondary2  | INFO:     172.18.0.4:37830 - "POST /replicate HTTP/1.1" 200 OK
+secondary1  | INFO:     172.18.0.4:45124 - "POST /replicate HTTP/1.1" 200 OK
 master      | INFO:httpx:HTTP Request: POST http://secondary1:8000/replicate "HTTP/1.1 200 OK"
-master      | INFO:master:Received ACK from http://secondary1:8000
+master      | INFO:master:Received ACK from http://secondary1:8000 for message 2
 master      | INFO:httpx:HTTP Request: POST http://secondary2:8000/replicate "HTTP/1.1 200 OK"
-master      | INFO:master:Received ACK from http://secondary2:8000
+master      | INFO:master:Received ACK from http://secondary2:8000 for message 2
 master      | INFO:master:Required ACKs received: 3/2
-master      | INFO:     172.18.0.1:38370 - "POST /messages HTTP/1.1" 200 OK
+master      | INFO:     172.18.0.1:60516 - "POST /messages HTTP/1.1" 200 OK
 master      | INFO:master:Received message: Message WC=3 with write_concern=3
-master      | INFO:master:Replicating to http://secondary1:8000/replicate
 master      | INFO:master:Replicating to http://secondary2:8000/replicate
+master      | INFO:master:Replicating to http://secondary1:8000/replicate
 secondary1  | INFO:secondary:Received replication request for message 3
-secondary1  | INFO:     172.18.0.4:56604 - "POST /replicate HTTP/1.1" 200 OK
+secondary1  | INFO:     172.18.0.4:45128 - "POST /replicate HTTP/1.1" 200 OK
 secondary2  | INFO:secondary:Received replication request for message 3
-secondary2  | INFO:     172.18.0.4:53690 - "POST /replicate HTTP/1.1" 200 OK
+secondary2  | INFO:     172.18.0.4:37846 - "POST /replicate HTTP/1.1" 200 OK
 master      | INFO:httpx:HTTP Request: POST http://secondary1:8000/replicate "HTTP/1.1 200 OK"
-master      | INFO:master:Received ACK from http://secondary1:8000
+master      | INFO:master:Received ACK from http://secondary1:8000 for message 3
 master      | INFO:httpx:HTTP Request: POST http://secondary2:8000/replicate "HTTP/1.1 200 OK"
-master      | INFO:master:Received ACK from http://secondary2:8000
+master      | INFO:master:Received ACK from http://secondary2:8000 for message 3
 master      | INFO:master:Required ACKs received: 3/3
-master      | INFO:     172.18.0.1:38384 - "POST /messages HTTP/1.1" 200 OK
+master      | INFO:     172.18.0.1:60518 - "POST /messages HTTP/1.1" 200 OK
 master      | INFO:master:Received message: Duplicate Test with write_concern=2
-master      | INFO:master:Replicating to http://secondary1:8000/replicate
 master      | INFO:master:Replicating to http://secondary2:8000/replicate
-secondary1  | INFO:secondary:Received replication request for message 4
-secondary1  | INFO:     172.18.0.4:56610 - "POST /replicate HTTP/1.1" 200 OK
+master      | INFO:master:Replicating to http://secondary1:8000/replicate
 secondary2  | INFO:secondary:Received replication request for message 4
-secondary2  | INFO:     172.18.0.4:53696 - "POST /replicate HTTP/1.1" 200 OK
-master      | INFO:httpx:HTTP Request: POST http://secondary1:8000/replicate "HTTP/1.1 200 OK"
-master      | INFO:master:Received ACK from http://secondary1:8000
+secondary2  | INFO:     172.18.0.4:37862 - "POST /replicate HTTP/1.1" 200 OK
+secondary1  | INFO:secondary:Received replication request for message 4
+secondary1  | INFO:     172.18.0.4:45142 - "POST /replicate HTTP/1.1" 200 OK
 master      | INFO:httpx:HTTP Request: POST http://secondary2:8000/replicate "HTTP/1.1 200 OK"
-master      | INFO:master:Received ACK from http://secondary2:8000
+master      | INFO:master:Received ACK from http://secondary2:8000 for message 4
+master      | INFO:httpx:HTTP Request: POST http://secondary1:8000/replicate "HTTP/1.1 200 OK"
+master      | INFO:master:Received ACK from http://secondary1:8000 for message 4
 master      | INFO:master:Required ACKs received: 3/2
-master      | INFO:     172.18.0.1:38400 - "POST /messages HTTP/1.1" 200 OK
+master      | INFO:     172.18.0.1:60532 - "POST /messages HTTP/1.1" 200 OK
 master      | INFO:master:Received message: Duplicate Test with write_concern=2
-master      | INFO:master:Replicating to http://secondary1:8000/replicate
 master      | INFO:master:Replicating to http://secondary2:8000/replicate
+master      | INFO:master:Replicating to http://secondary1:8000/replicate
 secondary1  | INFO:secondary:Received replication request for message 5
-secondary1  | INFO:     172.18.0.4:56620 - "POST /replicate HTTP/1.1" 200 OK
+secondary1  | INFO:     172.18.0.4:45154 - "POST /replicate HTTP/1.1" 200 OK
 secondary2  | INFO:secondary:Received replication request for message 5
-secondary2  | INFO:     172.18.0.4:53700 - "POST /replicate HTTP/1.1" 200 OK
-master      | INFO:httpx:HTTP Request: POST http://secondary1:8000/replicate "HTTP/1.1 200 OK"
-master      | INFO:master:Received ACK from http://secondary1:8000
+secondary2  | INFO:     172.18.0.4:37868 - "POST /replicate HTTP/1.1" 200 OK
 master      | INFO:httpx:HTTP Request: POST http://secondary2:8000/replicate "HTTP/1.1 200 OK"
-master      | INFO:master:Received ACK from http://secondary2:8000
+master      | INFO:master:Received ACK from http://secondary2:8000 for message 5
+master      | INFO:httpx:HTTP Request: POST http://secondary1:8000/replicate "HTTP/1.1 200 OK"
+master      | INFO:master:Received ACK from http://secondary1:8000 for message 5
 master      | INFO:master:Required ACKs received: 3/2
-master      | INFO:     172.18.0.1:38414 - "POST /messages HTTP/1.1" 200 OK
+master      | INFO:     172.18.0.1:60534 - "POST /messages HTTP/1.1" 200 OK
 master      | INFO:master:Received message: Message 1 with write_concern=1
-master      | INFO:master:Replicating to http://secondary1:8000/replicate
 master      | INFO:master:Replicating to http://secondary2:8000/replicate
+master      | INFO:master:Replicating to http://secondary1:8000/replicate
 master      | INFO:master:Received message: Message 2 with write_concern=1
-master      | INFO:master:Replicating to http://secondary1:8000/replicate
 master      | INFO:master:Replicating to http://secondary2:8000/replicate
+master      | INFO:master:Replicating to http://secondary1:8000/replicate
 master      | INFO:master:Received message: Message 3 with write_concern=1
 master      | INFO:master:Replicating to http://secondary1:8000/replicate
 master      | INFO:master:Replicating to http://secondary2:8000/replicate
@@ -88,227 +104,312 @@ master      | INFO:master:Received message: Message 4 with write_concern=1
 master      | INFO:master:Replicating to http://secondary1:8000/replicate
 master      | INFO:master:Replicating to http://secondary2:8000/replicate
 master      | INFO:master:Received message: Message 5 with write_concern=1
-master      | INFO:master:Replicating to http://secondary1:8000/replicate
 master      | INFO:master:Replicating to http://secondary2:8000/replicate
-secondary1  | INFO:secondary:Received replication request for message 6
-secondary1  | INFO:     172.18.0.4:56632 - "POST /replicate HTTP/1.1" 200 OK
+master      | INFO:master:Replicating to http://secondary1:8000/replicate
 secondary2  | INFO:secondary:Received replication request for message 6
-secondary2  | INFO:     172.18.0.4:53714 - "POST /replicate HTTP/1.1" 200 OK
+secondary1  | INFO:secondary:Received replication request for message 6
+secondary2  | INFO:     172.18.0.4:37884 - "POST /replicate HTTP/1.1" 200 OK
+secondary1  | INFO:     172.18.0.4:45166 - "POST /replicate HTTP/1.1" 200 OK
 master      | INFO:httpx:HTTP Request: POST http://secondary1:8000/replicate "HTTP/1.1 200 OK"
 master      | INFO:httpx:HTTP Request: POST http://secondary2:8000/replicate "HTTP/1.1 200 OK"
-secondary1  | INFO:secondary:Received replication request for message 7
 secondary2  | INFO:secondary:Received replication request for message 7
-secondary1  | INFO:     172.18.0.4:56644 - "POST /replicate HTTP/1.1" 200 OK
-secondary2  | INFO:     172.18.0.4:53722 - "POST /replicate HTTP/1.1" 200 OK
-master      | INFO:master:Received ACK from http://secondary1:8000
-master      | INFO:master:Received ACK from http://secondary2:8000
+secondary1  | INFO:secondary:Received replication request for message 7
+secondary2  | INFO:     172.18.0.4:37896 - "POST /replicate HTTP/1.1" 200 OK
+secondary1  | INFO:     172.18.0.4:45172 - "POST /replicate HTTP/1.1" 200 OK
+master      | INFO:master:Received ACK from http://secondary1:8000 for message 6
+master      | INFO:master:Received ACK from http://secondary2:8000 for message 6
 secondary1  | INFO:secondary:Received replication request for message 8
 secondary2  | INFO:secondary:Received replication request for message 8
-secondary1  | INFO:     172.18.0.4:56652 - "POST /replicate HTTP/1.1" 200 OK
-secondary2  | INFO:     172.18.0.4:53732 - "POST /replicate HTTP/1.1" 200 OK
-master      | INFO:httpx:HTTP Request: POST http://secondary1:8000/replicate "HTTP/1.1 200 OK"
+secondary2  | INFO:     172.18.0.4:37900 - "POST /replicate HTTP/1.1" 200 OK
+secondary1  | INFO:     172.18.0.4:45178 - "POST /replicate HTTP/1.1" 200 OK
 master      | INFO:httpx:HTTP Request: POST http://secondary2:8000/replicate "HTTP/1.1 200 OK"
+master      | INFO:httpx:HTTP Request: POST http://secondary1:8000/replicate "HTTP/1.1 200 OK"
 secondary1  | INFO:secondary:Received replication request for message 9
+master      | INFO:master:Received ACK from http://secondary2:8000 for message 7
+secondary1  | INFO:     172.18.0.4:45180 - "POST /replicate HTTP/1.1" 200 OK
 secondary2  | INFO:secondary:Received replication request for message 9
-secondary1  | INFO:     172.18.0.4:56654 - "POST /replicate HTTP/1.1" 200 OK
-master      | INFO:master:Received ACK from http://secondary1:8000
-secondary2  | INFO:     172.18.0.4:53734 - "POST /replicate HTTP/1.1" 200 OK
-master      | INFO:master:Received ACK from http://secondary2:8000
-master      | INFO:httpx:HTTP Request: POST http://secondary2:8000/replicate "HTTP/1.1 200 OK"
+master      | INFO:master:Received ACK from http://secondary1:8000 for message 7
+secondary2  | INFO:     172.18.0.4:37904 - "POST /replicate HTTP/1.1" 200 OK
 master      | INFO:httpx:HTTP Request: POST http://secondary1:8000/replicate "HTTP/1.1 200 OK"
+master      | INFO:httpx:HTTP Request: POST http://secondary2:8000/replicate "HTTP/1.1 200 OK"
 master      | INFO:master:Required ACKs received: 3/1
-secondary2  | INFO:secondary:Received replication request for message 10
 secondary1  | INFO:secondary:Received replication request for message 10
-master      | INFO:     172.18.0.1:38430 - "POST /messages HTTP/1.1" 200 OK
-secondary1  | INFO:     172.18.0.4:56658 - "POST /replicate HTTP/1.1" 200 OK
-secondary2  | INFO:     172.18.0.4:53746 - "POST /replicate HTTP/1.1" 200 OK
-master      | INFO:master:Received ACK from http://secondary2:8000
-master      | INFO:master:Received ACK from http://secondary1:8000
+secondary2  | INFO:secondary:Received replication request for message 10
+secondary1  | INFO:     172.18.0.4:45188 - "POST /replicate HTTP/1.1" 200 OK
+master      | INFO:     172.18.0.1:60538 - "POST /messages HTTP/1.1" 200 OK
+secondary2  | INFO:     172.18.0.4:37906 - "POST /replicate HTTP/1.1" 200 OK
+master      | INFO:master:Received ACK from http://secondary1:8000 for message 8
+master      | INFO:master:Received ACK from http://secondary2:8000 for message 8
 master      | INFO:httpx:HTTP Request: POST http://secondary1:8000/replicate "HTTP/1.1 200 OK"
 master      | INFO:httpx:HTTP Request: POST http://secondary2:8000/replicate "HTTP/1.1 200 OK"
-master      | INFO:master:Received ACK from http://secondary1:8000
-master      | INFO:master:Received ACK from http://secondary2:8000
-master      | INFO:httpx:HTTP Request: POST http://secondary2:8000/replicate "HTTP/1.1 200 OK"
+master      | INFO:master:Received ACK from http://secondary1:8000 for message 9
+master      | INFO:master:Received ACK from http://secondary2:8000 for message 9
 master      | INFO:httpx:HTTP Request: POST http://secondary1:8000/replicate "HTTP/1.1 200 OK"
+master      | INFO:httpx:HTTP Request: POST http://secondary2:8000/replicate "HTTP/1.1 200 OK"
 master      | INFO:master:Required ACKs received: 3/1
-master      | INFO:     172.18.0.1:38444 - "POST /messages HTTP/1.1" 200 OK
-master      | INFO:master:Received ACK from http://secondary2:8000
-master      | INFO:master:Received ACK from http://secondary1:8000
+master      | INFO:     172.18.0.1:60544 - "POST /messages HTTP/1.1" 200 OK
+master      | INFO:master:Received ACK from http://secondary1:8000 for message 10
+master      | INFO:master:Received ACK from http://secondary2:8000 for message 10
 master      | INFO:master:Required ACKs received: 3/1
-master      | INFO:     172.18.0.1:38456 - "POST /messages HTTP/1.1" 200 OK
+master      | INFO:     172.18.0.1:60546 - "POST /messages HTTP/1.1" 200 OK
 master      | INFO:master:Required ACKs received: 3/1
-master      | INFO:     172.18.0.1:38470 - "POST /messages HTTP/1.1" 200 OK
+master      | INFO:     172.18.0.1:60548 - "POST /messages HTTP/1.1" 200 OK
 master      | INFO:master:Required ACKs received: 3/1
-master      | INFO:     172.18.0.1:38472 - "POST /messages HTTP/1.1" 200 OK
-master      | INFO:     172.18.0.1:38482 - "POST /messages HTTP/1.1" 400 Bad Request
+master      | INFO:     172.18.0.1:60562 - "POST /messages HTTP/1.1" 200 OK
+master      | INFO:     172.18.0.1:60576 - "POST /messages HTTP/1.1" 400 Bad Request
 master      | INFO:master:Received message: Load Test 1 with write_concern=2
 master      | INFO:master:Replicating to http://secondary1:8000/replicate
 master      | INFO:master:Replicating to http://secondary2:8000/replicate
 master      | INFO:master:Received message: Load Test 2 with write_concern=2
-master      | INFO:master:Replicating to http://secondary1:8000/replicate
 master      | INFO:master:Replicating to http://secondary2:8000/replicate
+master      | INFO:master:Replicating to http://secondary1:8000/replicate
 master      | INFO:master:Received message: Load Test 3 with write_concern=2
 master      | INFO:master:Replicating to http://secondary1:8000/replicate
-secondary1  | INFO:secondary:Processed message 1: Message WC=1
 master      | INFO:master:Replicating to http://secondary2:8000/replicate
 master      | INFO:master:Received message: Load Test 4 with write_concern=2
 master      | INFO:master:Replicating to http://secondary1:8000/replicate
 master      | INFO:master:Replicating to http://secondary2:8000/replicate
 master      | INFO:master:Received message: Load Test 5 with write_concern=2
-master      | INFO:master:Replicating to http://secondary1:8000/replicate
 master      | INFO:master:Replicating to http://secondary2:8000/replicate
+master      | INFO:master:Replicating to http://secondary1:8000/replicate
 master      | INFO:master:Received message: Load Test 6 with write_concern=2
-master      | INFO:master:Replicating to http://secondary1:8000/replicate
 master      | INFO:master:Replicating to http://secondary2:8000/replicate
+master      | INFO:master:Replicating to http://secondary1:8000/replicate
 master      | INFO:master:Received message: Load Test 7 with write_concern=2
-master      | INFO:master:Replicating to http://secondary1:8000/replicate
-secondary2  | INFO:secondary:Processed message 1: Message WC=1
+secondary1  | ERROR:secondary:Simulating server error for message 1
+secondary1  | ERROR:asyncio:Task exception was never retrieved
+secondary1  | future: <Task finished name='Task-6' coro=<process_messages() done, defined at /app/secondary.py:27> exception=HTTPException(status_code=500, detail='Simulated server error')>
+secondary1  | Traceback (most recent call last):
+secondary1  |   File "/app/secondary.py", line 48, in process_messages
+secondary1  |     raise HTTPException(status_code=500, detail="Simulated server error")
+secondary1  | fastapi.exceptions.HTTPException: 500: Simulated server error
 master      | INFO:master:Replicating to http://secondary2:8000/replicate
+master      | INFO:master:Replicating to http://secondary1:8000/replicate
 master      | INFO:master:Received message: Load Test 8 with write_concern=2
-master      | INFO:master:Replicating to http://secondary1:8000/replicate
 master      | INFO:master:Replicating to http://secondary2:8000/replicate
+master      | INFO:master:Replicating to http://secondary1:8000/replicate
 master      | INFO:master:Received message: Load Test 9 with write_concern=2
-master      | INFO:master:Replicating to http://secondary1:8000/replicate
 master      | INFO:master:Replicating to http://secondary2:8000/replicate
+master      | INFO:master:Replicating to http://secondary1:8000/replicate
 master      | INFO:master:Received message: Load Test 10 with write_concern=2
 secondary1  | INFO:secondary:Received replication request for message 11
 secondary2  | INFO:secondary:Received replication request for message 11
-secondary1  | INFO:     172.18.0.4:56662 - "POST /replicate HTTP/1.1" 200 OK
-secondary2  | INFO:     172.18.0.4:53754 - "POST /replicate HTTP/1.1" 200 OK
+secondary1  | INFO:     172.18.0.4:45204 - "POST /replicate HTTP/1.1" 200 OK
+secondary2  | INFO:     172.18.0.4:37908 - "POST /replicate HTTP/1.1" 200 OK
 master      | INFO:master:Replicating to http://secondary1:8000/replicate
 master      | INFO:master:Replicating to http://secondary2:8000/replicate
 master      | INFO:httpx:HTTP Request: POST http://secondary1:8000/replicate "HTTP/1.1 200 OK"
 master      | INFO:httpx:HTTP Request: POST http://secondary2:8000/replicate "HTTP/1.1 200 OK"
 secondary1  | INFO:secondary:Received replication request for message 12
-secondary1  | INFO:     172.18.0.4:56664 - "POST /replicate HTTP/1.1" 200 OK
+secondary1  | INFO:     172.18.0.4:45206 - "POST /replicate HTTP/1.1" 200 OK
 secondary2  | INFO:secondary:Received replication request for message 12
-secondary2  | INFO:     172.18.0.4:53762 - "POST /replicate HTTP/1.1" 200 OK
-master      | INFO:master:Received ACK from http://secondary1:8000
-master      | INFO:master:Received ACK from http://secondary2:8000
+secondary2  | INFO:     172.18.0.4:37924 - "POST /replicate HTTP/1.1" 200 OK
+master      | INFO:master:Received ACK from http://secondary1:8000 for message 11
+master      | INFO:master:Received ACK from http://secondary2:8000 for message 11
 secondary1  | INFO:secondary:Received replication request for message 13
 secondary2  | INFO:secondary:Received replication request for message 13
-secondary1  | INFO:     172.18.0.4:56666 - "POST /replicate HTTP/1.1" 200 OK
-secondary2  | INFO:     172.18.0.4:53768 - "POST /replicate HTTP/1.1" 200 OK
+secondary1  | INFO:     172.18.0.4:45222 - "POST /replicate HTTP/1.1" 200 OK
+secondary2  | INFO:     172.18.0.4:37928 - "POST /replicate HTTP/1.1" 200 OK
 master      | INFO:httpx:HTTP Request: POST http://secondary1:8000/replicate "HTTP/1.1 200 OK"
 master      | INFO:httpx:HTTP Request: POST http://secondary2:8000/replicate "HTTP/1.1 200 OK"
-secondary1  | INFO:secondary:Received replication request for message 14
 secondary2  | INFO:secondary:Received replication request for message 14
-secondary1  | INFO:     172.18.0.4:56678 - "POST /replicate HTTP/1.1" 200 OK
-secondary2  | INFO:     172.18.0.4:53782 - "POST /replicate HTTP/1.1" 200 OK
-master      | INFO:master:Received ACK from http://secondary1:8000
-master      | INFO:master:Received ACK from http://secondary2:8000
+secondary1  | INFO:secondary:Received replication request for message 14
+secondary2  | INFO:     172.18.0.4:37940 - "POST /replicate HTTP/1.1" 200 OK
+secondary1  | INFO:     172.18.0.4:45238 - "POST /replicate HTTP/1.1" 200 OK
+master      | INFO:master:Received ACK from http://secondary1:8000 for message 12
+master      | INFO:master:Received ACK from http://secondary2:8000 for message 12
 master      | INFO:httpx:HTTP Request: POST http://secondary1:8000/replicate "HTTP/1.1 200 OK"
 master      | INFO:httpx:HTTP Request: POST http://secondary2:8000/replicate "HTTP/1.1 200 OK"
-secondary1  | INFO:secondary:Received replication request for message 15
-secondary1  | INFO:     172.18.0.4:56680 - "POST /replicate HTTP/1.1" 200 OK
 secondary2  | INFO:secondary:Received replication request for message 15
+secondary1  | INFO:secondary:Received replication request for message 15
 master      | INFO:master:Required ACKs received: 3/2
-master      | INFO:     172.18.0.1:38490 - "POST /messages HTTP/1.1" 200 OK
-secondary2  | INFO:     172.18.0.4:53786 - "POST /replicate HTTP/1.1" 200 OK
-master      | INFO:master:Received ACK from http://secondary1:8000
-master      | INFO:master:Received ACK from http://secondary2:8000
-master      | INFO:httpx:HTTP Request: POST http://secondary1:8000/replicate "HTTP/1.1 200 OK"
+secondary1  | INFO:     172.18.0.4:45248 - "POST /replicate HTTP/1.1" 200 OK
+secondary2  | INFO:     172.18.0.4:37944 - "POST /replicate HTTP/1.1" 200 OK
+master      | INFO:     172.18.0.1:60592 - "POST /messages HTTP/1.1" 200 OK
+master      | INFO:master:Received ACK from http://secondary1:8000 for message 13
+master      | INFO:master:Received ACK from http://secondary2:8000 for message 13
 master      | INFO:httpx:HTTP Request: POST http://secondary2:8000/replicate "HTTP/1.1 200 OK"
-secondary1  | INFO:secondary:Received replication request for message 16
-secondary1  | INFO:     172.18.0.4:56686 - "POST /replicate HTTP/1.1" 200 OK
+master      | INFO:httpx:HTTP Request: POST http://secondary1:8000/replicate "HTTP/1.1 200 OK"
 secondary2  | INFO:secondary:Received replication request for message 16
-secondary2  | INFO:     172.18.0.4:53800 - "POST /replicate HTTP/1.1" 200 OK
-master      | INFO:master:Received ACK from http://secondary1:8000
-master      | INFO:master:Received ACK from http://secondary2:8000
-master      | INFO:httpx:HTTP Request: POST http://secondary1:8000/replicate "HTTP/1.1 200 OK"
+secondary1  | INFO:secondary:Received replication request for message 16
+secondary2  | INFO:     172.18.0.4:37958 - "POST /replicate HTTP/1.1" 200 OK
+secondary1  | INFO:     172.18.0.4:45252 - "POST /replicate HTTP/1.1" 200 OK
+master      | INFO:master:Received ACK from http://secondary2:8000 for message 14
+master      | INFO:master:Received ACK from http://secondary1:8000 for message 14
 master      | INFO:httpx:HTTP Request: POST http://secondary2:8000/replicate "HTTP/1.1 200 OK"
+master      | INFO:httpx:HTTP Request: POST http://secondary1:8000/replicate "HTTP/1.1 200 OK"
 secondary1  | INFO:secondary:Received replication request for message 17
-secondary1  | INFO:     172.18.0.4:56702 - "POST /replicate HTTP/1.1" 200 OK
-master      | INFO:master:Required ACKs received: 3/2
 secondary2  | INFO:secondary:Received replication request for message 17
-secondary2  | INFO:     172.18.0.4:53804 - "POST /replicate HTTP/1.1" 200 OK
-master      | INFO:     172.18.0.1:38506 - "POST /messages HTTP/1.1" 200 OK
-master      | INFO:master:Received ACK from http://secondary1:8000
-master      | INFO:master:Received ACK from http://secondary2:8000
-master      | INFO:httpx:HTTP Request: POST http://secondary1:8000/replicate "HTTP/1.1 200 OK"
-master      | INFO:httpx:HTTP Request: POST http://secondary2:8000/replicate "HTTP/1.1 200 OK"
-secondary1  | INFO:secondary:Received replication request for message 18
 master      | INFO:master:Required ACKs received: 3/2
+secondary1  | INFO:     172.18.0.4:45266 - "POST /replicate HTTP/1.1" 200 OK
+master      | INFO:     172.18.0.1:60608 - "POST /messages HTTP/1.1" 200 OK
+secondary2  | INFO:     172.18.0.4:37964 - "POST /replicate HTTP/1.1" 200 OK
+master      | INFO:master:Received ACK from http://secondary2:8000 for message 15
+master      | INFO:master:Received ACK from http://secondary1:8000 for message 15
+master      | INFO:httpx:HTTP Request: POST http://secondary2:8000/replicate "HTTP/1.1 200 OK"
+master      | INFO:httpx:HTTP Request: POST http://secondary1:8000/replicate "HTTP/1.1 200 OK"
 secondary2  | INFO:secondary:Received replication request for message 18
-secondary1  | INFO:     172.18.0.4:56706 - "POST /replicate HTTP/1.1" 200 OK
-master      | INFO:     172.18.0.1:38518 - "POST /messages HTTP/1.1" 200 OK
-secondary2  | INFO:     172.18.0.4:53812 - "POST /replicate HTTP/1.1" 200 OK
-master      | INFO:master:Received ACK from http://secondary1:8000
-master      | INFO:master:Received ACK from http://secondary2:8000
+secondary1  | INFO:secondary:Received replication request for message 18
+secondary2  | INFO:     172.18.0.4:37976 - "POST /replicate HTTP/1.1" 200 OK
+master      | INFO:master:Required ACKs received: 3/2
+secondary1  | INFO:     172.18.0.4:45276 - "POST /replicate HTTP/1.1" 200 OK
+master      | INFO:     172.18.0.1:60612 - "POST /messages HTTP/1.1" 200 OK
+master      | INFO:master:Received ACK from http://secondary2:8000 for message 16
+master      | INFO:master:Received ACK from http://secondary1:8000 for message 16
 master      | INFO:httpx:HTTP Request: POST http://secondary1:8000/replicate "HTTP/1.1 200 OK"
 master      | INFO:httpx:HTTP Request: POST http://secondary2:8000/replicate "HTTP/1.1 200 OK"
+secondary2  | INFO:secondary:Received replication request for message 19
 secondary1  | INFO:secondary:Received replication request for message 19
 master      | INFO:master:Required ACKs received: 3/2
-secondary2  | INFO:secondary:Received replication request for message 19
-master      | INFO:     172.18.0.1:38524 - "POST /messages HTTP/1.1" 200 OK
-secondary1  | INFO:     172.18.0.4:56708 - "POST /replicate HTTP/1.1" 200 OK
-secondary2  | INFO:     172.18.0.4:53822 - "POST /replicate HTTP/1.1" 200 OK
-master      | INFO:master:Received ACK from http://secondary1:8000
-master      | INFO:master:Received ACK from http://secondary2:8000
+secondary2  | INFO:     172.18.0.4:37988 - "POST /replicate HTTP/1.1" 200 OK
+secondary1  | INFO:     172.18.0.4:45282 - "POST /replicate HTTP/1.1" 200 OK
+master      | INFO:     172.18.0.1:60628 - "POST /messages HTTP/1.1" 200 OK
+master      | INFO:master:Received ACK from http://secondary1:8000 for message 17
+master      | INFO:master:Received ACK from http://secondary2:8000 for message 17
 master      | INFO:httpx:HTTP Request: POST http://secondary2:8000/replicate "HTTP/1.1 200 OK"
 master      | INFO:httpx:HTTP Request: POST http://secondary1:8000/replicate "HTTP/1.1 200 OK"
-master      | INFO:master:Required ACKs received: 3/2
-secondary2  | INFO:secondary:Received replication request for message 20
-master      | INFO:     172.18.0.1:38532 - "POST /messages HTTP/1.1" 200 OK
-secondary2  | INFO:     172.18.0.4:53838 - "POST /replicate HTTP/1.1" 200 OK
 secondary1  | INFO:secondary:Received replication request for message 20
-secondary1  | INFO:     172.18.0.4:56712 - "POST /replicate HTTP/1.1" 200 OK
-master      | INFO:master:Received ACK from http://secondary2:8000
-master      | INFO:master:Received ACK from http://secondary1:8000
-master      | INFO:httpx:HTTP Request: POST http://secondary1:8000/replicate "HTTP/1.1 200 OK"
-master      | INFO:httpx:HTTP Request: POST http://secondary2:8000/replicate "HTTP/1.1 200 OK"
 master      | INFO:master:Required ACKs received: 3/2
-master      | INFO:     172.18.0.1:38538 - "POST /messages HTTP/1.1" 200 OK
-master      | INFO:master:Received ACK from http://secondary1:8000
-master      | INFO:master:Received ACK from http://secondary2:8000
+master      | INFO:     172.18.0.1:60634 - "POST /messages HTTP/1.1" 200 OK
+secondary1  | INFO:     172.18.0.4:45288 - "POST /replicate HTTP/1.1" 200 OK
+secondary2  | INFO:secondary:Received replication request for message 20
+secondary2  | INFO:     172.18.0.4:38002 - "POST /replicate HTTP/1.1" 200 OK
+master      | INFO:master:Received ACK from http://secondary2:8000 for message 18
+master      | INFO:master:Received ACK from http://secondary1:8000 for message 18
 master      | INFO:httpx:HTTP Request: POST http://secondary2:8000/replicate "HTTP/1.1 200 OK"
 master      | INFO:httpx:HTTP Request: POST http://secondary1:8000/replicate "HTTP/1.1 200 OK"
 master      | INFO:master:Required ACKs received: 3/2
-master      | INFO:     172.18.0.1:38544 - "POST /messages HTTP/1.1" 200 OK
-master      | INFO:master:Received ACK from http://secondary2:8000
-master      | INFO:master:Received ACK from http://secondary1:8000
+master      | INFO:     172.18.0.1:60646 - "POST /messages HTTP/1.1" 200 OK
+master      | INFO:master:Received ACK from http://secondary2:8000 for message 19
+master      | INFO:master:Received ACK from http://secondary1:8000 for message 19
+master      | INFO:httpx:HTTP Request: POST http://secondary1:8000/replicate "HTTP/1.1 200 OK"
+master      | INFO:httpx:HTTP Request: POST http://secondary2:8000/replicate "HTTP/1.1 200 OK"
 master      | INFO:master:Required ACKs received: 3/2
-master      | INFO:     172.18.0.1:38556 - "POST /messages HTTP/1.1" 200 OK
+master      | INFO:     172.18.0.1:60652 - "POST /messages HTTP/1.1" 200 OK
+master      | INFO:master:Received ACK from http://secondary1:8000 for message 20
+master      | INFO:master:Received ACK from http://secondary2:8000 for message 20
 master      | INFO:master:Required ACKs received: 3/2
-master      | INFO:     172.18.0.1:38564 - "POST /messages HTTP/1.1" 200 OK
+master      | INFO:     172.18.0.1:60658 - "POST /messages HTTP/1.1" 200 OK
 master      | INFO:master:Required ACKs received: 3/2
-master      | INFO:     172.18.0.1:38574 - "POST /messages HTTP/1.1" 200 OK
+master      | INFO:     172.18.0.1:60672 - "POST /messages HTTP/1.1" 200 OK
+master      | INFO:master:Required ACKs received: 3/2
+master      | INFO:     172.18.0.1:60678 - "POST /messages HTTP/1.1" 200 OK
+secondary1  | INFO:     172.18.0.4:45304 - "GET /status HTTP/1.1" 200 OK
+master      | INFO:httpx:HTTP Request: GET http://secondary1:8000/status "HTTP/1.1 200 OK"
+master      | INFO:master:Heartbeat check for http://secondary1:8000: healthy
+secondary2  | INFO:     172.18.0.4:38014 - "GET /status HTTP/1.1" 200 OK
+master      | INFO:httpx:HTTP Request: GET http://secondary2:8000/status "HTTP/1.1 200 OK"
+master      | INFO:master:Heartbeat check for http://secondary2:8000: healthy
+secondary2  | INFO:secondary:Processed message 1: Message WC=1
 secondary2  | INFO:secondary:Processed message 2: Message WC=2
-secondary1  | INFO:secondary:Processed message 2: Message WC=2
+secondary1  | INFO:     172.18.0.4:53350 - "GET /status HTTP/1.1" 200 OK
+master      | INFO:httpx:HTTP Request: GET http://secondary1:8000/status "HTTP/1.1 200 OK"
+master      | INFO:master:Heartbeat check for http://secondary1:8000: healthy
+secondary2  | INFO:     172.18.0.4:38446 - "GET /status HTTP/1.1" 200 OK
+master      | INFO:httpx:HTTP Request: GET http://secondary2:8000/status "HTTP/1.1 200 OK"
+master      | INFO:master:Heartbeat check for http://secondary2:8000: healthy
 secondary2  | INFO:secondary:Processed message 3: Message WC=3
-secondary1  | INFO:secondary:Processed message 3: Message WC=3
-secondary1  | INFO:secondary:Processed message 4: Duplicate Test
-secondary2  | INFO:secondary:Processed message 4: Duplicate Test
-secondary1  | INFO:secondary:Processed message 5: Duplicate Test
-secondary2  | INFO:secondary:Processed message 5: Duplicate Test
 secondary1 exited with code 137
 master      | INFO:master:Received message: Secondary Down Test with write_concern=2
-master      | INFO:master:Replicating to http://secondary1:8000/replicate
 master      | INFO:master:Replicating to http://secondary2:8000/replicate
+master      | INFO:master:Replicating to http://secondary1:8000/replicate
 secondary2  | INFO:secondary:Received replication request for message 21
-secondary2  | INFO:     172.18.0.4:59550 - "POST /replicate HTTP/1.1" 200 OK
+secondary2  | INFO:     172.18.0.4:38450 - "POST /replicate HTTP/1.1" 200 OK
 master      | INFO:httpx:HTTP Request: POST http://secondary2:8000/replicate "HTTP/1.1 200 OK"
-master      | INFO:master:Received ACK from http://secondary2:8000
-secondary2  | INFO:secondary:Processed message 6: Message 1
+master      | INFO:master:Received ACK from http://secondary2:8000 for message 21
+secondary2  | INFO:secondary:Processed message 4: Duplicate Test
+master      | INFO:master:Heartbeat check for http://secondary1:8000: unhealthy
+secondary2  | INFO:     172.18.0.4:38464 - "GET /status HTTP/1.1" 200 OK
+master      | INFO:httpx:HTTP Request: GET http://secondary2:8000/status "HTTP/1.1 200 OK"
+master      | INFO:master:Heartbeat check for http://secondary2:8000: healthy
 master      | ERROR:master:Failed to replicate to http://secondary1:8000: [Errno -2] Name or service not known
 master      | INFO:master:Required ACKs received: 2/2
-master      | INFO:     172.18.0.1:43476 - "POST /messages HTTP/1.1" 200 OK
+master      | INFO:     172.18.0.1:34832 - "POST /messages HTTP/1.1" 200 OK
 master      | INFO:master:Fetching all messages
-master      | INFO:     172.18.0.1:43480 - "GET /messages HTTP/1.1" 200 OK
-secondary2  | INFO:secondary:Processed message 7: Message 2
+master      | INFO:     172.18.0.1:34840 - "GET /messages HTTP/1.1" 200 OK
+secondary2  | ERROR:secondary:Simulating server error for message 5
+secondary2  | ERROR:asyncio:Task exception was never retrieved
+secondary2  | future: <Task finished name='Task-6' coro=<process_messages() done, defined at /app/secondary.py:27> exception=HTTPException(status_code=500, detail='Simulated server error')>
+secondary2  | Traceback (most recent call last):
+secondary2  |   File "/app/secondary.py", line 48, in process_messages
+secondary2  |     raise HTTPException(status_code=500, detail="Simulated server error")
+secondary2  | fastapi.exceptions.HTTPException: 500: Simulated server error
 secondary2  | INFO:secondary:Fetching all replicated messages
-secondary2  | INFO:     172.18.0.1:41012 - "GET /messages HTTP/1.1" 200 OK
-secondary2  | INFO:secondary:Processed message 8: Message 3
-secondary2  | INFO:secondary:Processed message 9: Message 4
-secondary2  | INFO:secondary:Processed message 10: Message 5
-secondary2  | INFO:secondary:Processed message 11: Load Test 1
-secondary2  | INFO:secondary:Processed message 12: Load Test 2
-secondary2  | INFO:secondary:Processed message 13: Load Test 3
-secondary2  | INFO:secondary:Processed message 14: Load Test 4
-secondary2  | INFO:secondary:Processed message 15: Load Test 5
-secondary2  | INFO:secondary:Processed message 16: Load Test 6
-secondary2  | INFO:secondary:Processed message 17: Load Test 7
-secondary2  | INFO:secondary:Processed message 18: Load Test 8
-secondary2  | INFO:secondary:Processed message 19: Load Test 9
-secondary2  | INFO:secondary:Processed message 20: Load Test 10
-secondary2  | INFO:secondary:Processed message 21: Secondary Down Test
+secondary2  | INFO:     172.18.0.1:58918 - "GET /messages HTTP/1.1" 200 OK
+master      | INFO:master:Heartbeat check for http://secondary1:8000: unhealthy
+secondary2  | INFO:     172.18.0.4:38410 - "GET /status HTTP/1.1" 200 OK
+master      | INFO:httpx:HTTP Request: GET http://secondary2:8000/status "HTTP/1.1 200 OK"
+master      | INFO:master:Heartbeat check for http://secondary2:8000: healthy
+master      | INFO:master:Heartbeat check for http://secondary1:8000: unhealthy
+secondary2  | INFO:     172.18.0.4:38884 - "GET /status HTTP/1.1" 200 OK
+master      | INFO:httpx:HTTP Request: GET http://secondary2:8000/status "HTTP/1.1 200 OK"
+master      | INFO:master:Heartbeat check for http://secondary2:8000: healthy
+master      | INFO:master:Heartbeat check for http://secondary1:8000: unhealthy
+secondary2  | INFO:     172.18.0.4:38888 - "GET /status HTTP/1.1" 200 OK
+master      | INFO:httpx:HTTP Request: GET http://secondary2:8000/status "HTTP/1.1 200 OK"
+master      | INFO:master:Heartbeat check for http://secondary2:8000: healthy
+master      | INFO:master:Heartbeat check for http://secondary1:8000: unhealthy
+secondary2  | INFO:     172.18.0.4:43660 - "GET /status HTTP/1.1" 200 OK
+master      | INFO:httpx:HTTP Request: GET http://secondary2:8000/status "HTTP/1.1 200 OK"
+master      | INFO:master:Heartbeat check for http://secondary2:8000: healthy
+master      | INFO:master:Heartbeat check for http://secondary1:8000: unhealthy
+secondary2  | INFO:     172.18.0.4:33664 - "GET /status HTTP/1.1" 200 OK
+master      | INFO:httpx:HTTP Request: GET http://secondary2:8000/status "HTTP/1.1 200 OK"
+master      | INFO:master:Heartbeat check for http://secondary2:8000: healthy
+master      | INFO:master:Heartbeat check for http://secondary1:8000: unhealthy
+secondary2  | INFO:     172.18.0.4:33678 - "GET /status HTTP/1.1" 200 OK
+master      | INFO:httpx:HTTP Request: GET http://secondary2:8000/status "HTTP/1.1 200 OK"
+master      | INFO:master:Heartbeat check for http://secondary2:8000: healthy
+master      | INFO:master:Heartbeat check for http://secondary1:8000: unhealthy
+secondary2  | INFO:     172.18.0.4:40240 - "GET /status HTTP/1.1" 200 OK
+master      | INFO:httpx:HTTP Request: GET http://secondary2:8000/status "HTTP/1.1 200 OK"
+master      | INFO:master:Heartbeat check for http://secondary2:8000: healthy
+master      | INFO:master:Heartbeat check for http://secondary1:8000: unhealthy
+secondary2  | INFO:     172.18.0.4:45232 - "GET /status HTTP/1.1" 200 OK
+master      | INFO:httpx:HTTP Request: GET http://secondary2:8000/status "HTTP/1.1 200 OK"
+master      | INFO:master:Heartbeat check for http://secondary2:8000: healthy
+master      | INFO:master:Heartbeat check for http://secondary1:8000: unhealthy
+secondary2  | INFO:     172.18.0.4:49560 - "GET /status HTTP/1.1" 200 OK
+master      | INFO:httpx:HTTP Request: GET http://secondary2:8000/status "HTTP/1.1 200 OK"
+master      | INFO:master:Heartbeat check for http://secondary2:8000: healthy
+master      | INFO:master:Heartbeat check for http://secondary1:8000: unhealthy
+secondary2  | INFO:     172.18.0.4:49570 - "GET /status HTTP/1.1" 200 OK
+master      | INFO:httpx:HTTP Request: GET http://secondary2:8000/status "HTTP/1.1 200 OK"
+master      | INFO:master:Heartbeat check for http://secondary2:8000: healthy
+master      | INFO:master:Heartbeat check for http://secondary1:8000: unhealthy
+secondary2  | INFO:     172.18.0.4:60312 - "GET /status HTTP/1.1" 200 OK
+master      | INFO:httpx:HTTP Request: GET http://secondary2:8000/status "HTTP/1.1 200 OK"
+master      | INFO:master:Heartbeat check for http://secondary2:8000: healthy
+master      | INFO:master:Heartbeat check for http://secondary1:8000: unhealthy
+secondary2  | INFO:     172.18.0.4:56926 - "GET /status HTTP/1.1" 200 OK
+master      | INFO:httpx:HTTP Request: GET http://secondary2:8000/status "HTTP/1.1 200 OK"
+master      | INFO:master:Heartbeat check for http://secondary2:8000: healthy
+master      | INFO:master:Heartbeat check for http://secondary1:8000: unhealthy
+secondary2  | INFO:     172.18.0.4:56940 - "GET /status HTTP/1.1" 200 OK
+master      | INFO:httpx:HTTP Request: GET http://secondary2:8000/status "HTTP/1.1 200 OK"
+master      | INFO:master:Heartbeat check for http://secondary2:8000: healthy
+master      | INFO:master:Heartbeat check for http://secondary1:8000: unhealthy
+secondary2  | INFO:     172.18.0.4:56420 - "GET /status HTTP/1.1" 200 OK
+master      | INFO:httpx:HTTP Request: GET http://secondary2:8000/status "HTTP/1.1 200 OK"
+master      | INFO:master:Heartbeat check for http://secondary2:8000: healthy
+master      | INFO:master:Heartbeat check for http://secondary1:8000: unhealthy
+secondary2  | INFO:     172.18.0.4:50490 - "GET /status HTTP/1.1" 200 OK
+master      | INFO:httpx:HTTP Request: GET http://secondary2:8000/status "HTTP/1.1 200 OK"
+master      | INFO:master:Heartbeat check for http://secondary2:8000: healthy
+master      | INFO:master:Heartbeat check for http://secondary1:8000: unhealthy
+secondary2  | INFO:     172.18.0.4:53332 - "GET /status HTTP/1.1" 200 OK
+master      | INFO:httpx:HTTP Request: GET http://secondary2:8000/status "HTTP/1.1 200 OK"
+master      | INFO:master:Heartbeat check for http://secondary2:8000: healthy
+master      | INFO:master:Heartbeat check for http://secondary1:8000: unhealthy
+secondary2  | INFO:     172.18.0.4:53346 - "GET /status HTTP/1.1" 200 OK
+master      | INFO:httpx:HTTP Request: GET http://secondary2:8000/status "HTTP/1.1 200 OK"
+master      | INFO:master:Heartbeat check for http://secondary2:8000: healthy
+master      | INFO:master:Heartbeat check for http://secondary1:8000: unhealthy
+secondary2  | INFO:     172.18.0.4:60854 - "GET /status HTTP/1.1" 200 OK
+master      | INFO:httpx:HTTP Request: GET http://secondary2:8000/status "HTTP/1.1 200 OK"
+master      | INFO:master:Heartbeat check for http://secondary2:8000: healthy
+master      | INFO:master:Heartbeat check for http://secondary1:8000: unhealthy
+secondary2  | INFO:     172.18.0.4:49370 - "GET /status HTTP/1.1" 200 OK
+master      | INFO:httpx:HTTP Request: GET http://secondary2:8000/status "HTTP/1.1 200 OK"
+master      | INFO:master:Heartbeat check for http://secondary2:8000: healthy
+
